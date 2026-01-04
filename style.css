@@ -1,4 +1,5 @@
 :root {
+    /* High-End Dark Palette */
     --bg-black: #000000;
     --card-dark: #0a0a0c;
     --sidebar-bg: #050505;
@@ -14,13 +15,15 @@ body {
     font-family: 'Inter', -apple-system, sans-serif;
     background: radial-gradient(circle at center, #0a0a0f 0%, #000000 100%);
     color: var(--text-main);
-    overflow: hidden;
+    /* Changed overflow to auto to allow scrolling on mobile */
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 h1 {
     text-align: center;
     margin: 0;
-    padding: 25px 0;
+    padding: 25px 15px;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 2px;
@@ -30,8 +33,13 @@ h1 {
     border-bottom: 1px solid var(--border-subtle);
 }
 
-.container { display: flex; height: calc(100vh - 75px); }
+.container { 
+    display: flex; 
+    flex-direction: row;
+    min-height: calc(100vh - 75px); 
+}
 
+/* Sidebar Styling */
 .sidebar {
     width: 280px;
     background: var(--sidebar-bg);
@@ -40,6 +48,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    flex-shrink: 0;
 }
 
 .sidebar h3 {
@@ -67,9 +76,20 @@ h1 {
     background-size: 16px;
 }
 
-.main { flex: 1; padding: 25px; }
+/* Main Content Area */
+.main { 
+    flex: 1; 
+    padding: 25px; 
+    display: flex;
+    flex-direction: column;
+}
 
-.plot-nav { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; }
+.plot-nav { 
+    display: flex; 
+    gap: 12px; 
+    margin-bottom: 25px; 
+    flex-wrap: wrap; 
+}
 
 .plot-btn {
     padding: 10px 20px;
@@ -82,6 +102,7 @@ h1 {
     cursor: pointer;
     transition: 0.3s ease;
     text-decoration: none;
+    text-align: center;
 }
 
 .plot-btn:hover { 
@@ -107,9 +128,11 @@ h1 {
     color: white !important;
 }
 
+/* Chart Container */
 #plotContainer, #threeContainer {
     width: 100%;
-    height: calc(100vh - 200px);
+    height: 60vh; /* Responsive height */
+    min-height: 400px;
     background: radial-gradient(circle at center, #0f172a 0%, #000000 100%);
     border-radius: 24px;
     border: 1px solid rgba(16, 185, 129, 0.1);
@@ -136,3 +159,83 @@ h1 {
 }
 
 #logoutBtn:hover { background: #ff4d4d; color: white; border-color: #ff4d4d; }
+
+/* =========================================
+   RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+/* Tablets and Mobile Phones */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column; /* Stack sidebar on top of main content */
+    }
+
+    .sidebar {
+        width: 100%; /* Sidebar takes full width */
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+        box-sizing: border-box;
+        padding: 20px;
+    }
+
+    .main {
+        padding: 20px;
+    }
+
+    #plotContainer, #threeContainer {
+        height: 50vh;
+    }
+}
+
+/* Mobile Phones (Portrait) */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .plot-nav {
+        gap: 8px;
+    }
+
+    .plot-btn {
+        flex: 1 1 calc(50% - 8px); /* Buttons take 50% width in the grid */
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+
+    .plot-btn.external-link {
+        flex: 1 1 100%; /* External link takes full width */
+    }
+
+    #plotContainer, #threeContainer {
+        min-height: 300px;
+    }
+}
+
+#loginBtn {
+    /* The main button color */
+    background-color: var(--primary-emerald); 
+    
+    /* The text color (Black looks best on bright Emerald) */
+    color: #000000; 
+    
+    /* UI Polish */
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* The "Sexy" Glow Effect */
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+#loginBtn:hover {
+    /* Slightly brighter on hover */
+    background-color: #34d399; 
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.6);
+}
