@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>🛰️ Satellite Orbit Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <script src="https://unpkg.com/satellite.js/dist/satellite.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<h1>🛰️ Satellite Orbit Visualisation Dashboard</h1>
+
+<div class="container">
+    <aside class="sidebar">
+        <h3>Select Satellite</h3>
+        <select id="satelliteSelect"></select>
+        <h3>Orbit Analysis</h3>
+        <p>Avg Altitude: <span id="avgAlt">–</span> m</p>
+        <p>Avg Speed: <span id="avgSpeed">–</span> m/s</p>
+        <p>Orbit Type: <span id="orbitType">–</span></p>
+        <h3>Time Control</h3>
+        <input type="range" id="timeSlider" />
+    </aside>
+
+    <main class="main">
+        <div class="plot-nav">
+            <button class="plot-btn active" data-plot="orbit">Orbit</button>
+            <button class="plot-btn" data-plot="altitude">Altitude</button>
+            <button class="plot-btn" data-plot="speed">Speed</button>
+            <button class="plot-btn" data-plot="correlation">Correlation</button>
+            <button class="plot-btn" data-plot="orbit3d">3D View</button>
+        </div>
+        <div id="plotContainer" class="chart"></div>
+        <div id="threeContainer" style="display:none; height: 600px;"></div>
+    </main>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.152.2/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
