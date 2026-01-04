@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Satellite Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { display: flex; justify-content: center; align-items: center; height: 100vh; background: #1a1a1a; }
+        .auth-card { background: white; padding: 30px; border-radius: 8px; width: 350px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .link { margin-top: 15px; font-size: 14px; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>🛰️ Create Account</h2>
+            <input type="email" id="email" placeholder="Email Address">
+            <input type="password" id="password" placeholder="Password (min 6 chars)">
+            <button id="signupBtn">Sign Up</button>
+            <p id="error" style="color:red; font-size: 12px;"></p>
+            <div class="link">Already have an account? <a href="login.html">Login</a></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA_3-4U2ZRbfDD1s5AWvEmIFbs3_dX_E48",
+            authDomain: "authbase-c00b6.firebaseapp.com",
+            projectId: "authbase-c00b6",
+  storageBucket: "authbase-c00b6.firebasestorage.app",
+  messagingSenderId: "128729816046",
+  appId: "1:128729816046:web:f59486ad9704ea040d8cff"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById('signupBtn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            createUserWithEmailAndPassword(auth, email, pass)
+                .then(() => window.location.href = "index.html")
+                .catch(err => document.getElementById('error').innerText = err.message);
+        });
+    </script>
+</body>
+</html>
